@@ -41,6 +41,7 @@ USER_APPS = [
 
 EXTERNAL_APPS = [
     'drf_spectacular',
+    'rest_framework',
 ]
 
 INSTALLED_APPS = [
