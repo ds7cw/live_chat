@@ -1,9 +1,15 @@
+# Django database migrations
 python manage.py makemigrations
 python manage.py migrate
 
+# Create React app and install node modules
 npm create vite@latest
 cd <react-app>
 npm install
 npm run dev
 
 npm install react-router-dom
+
+# Install MUI framework for UI elements
+npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/icons-material
