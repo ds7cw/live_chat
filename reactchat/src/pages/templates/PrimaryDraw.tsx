@@ -6,11 +6,11 @@ import MuiDrawer from "@mui/material/Drawer";
 
 const PrimaryDraw = () => {
     const theme = useTheme();
-    const below600 = useMediaQuery("(max-width:599px)") 
+    const below600 = useMediaQuery("(max-width:599px)");
     const [open, setOpen] = useState(!below600);
 
     const openedMixin = () => ({
-        transition: theme.transitions.create("width:", {
+        transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
@@ -18,7 +18,7 @@ const PrimaryDraw = () => {
     });
 
     const closedMixin = () => ({
-        transition: theme.transitions.create("width:", {
+        transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),

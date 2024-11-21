@@ -13,3 +13,9 @@ npm install react-router-dom
 # Install MUI framework for UI elements
 npm install @mui/material @emotion/react @emotion/styled
 npm install @mui/icons-material
+
+# Install Axios
+npm i axios
+
+# Install Django cors headers
+pip install django-cors-headers
