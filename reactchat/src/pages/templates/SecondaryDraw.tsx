@@ -1,18 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import axios from "axios";
-
 const SecondaryDraw = () => {
     const theme = useTheme();
-    
-    axios.get("http://127.0.0.1:8000/api/server/select/?category=cat2").then(response => {
-        console.log(response.data);
-    }).catch(error => {
-        console.log(error);
-    });
 
-    return <Box
+    return (<Box
         sx={{
             minWidth: `${theme.secondaryDraw.width}px`,
             height: `calc(100vh - ${theme.primaryAppBar.height}px )`,
@@ -27,7 +19,7 @@ const SecondaryDraw = () => {
                     {i + 1}
                 </Typography>
             ))}
-        </Box>;
+        </Box>);
 };
 
 export default SecondaryDraw;
