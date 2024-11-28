@@ -3,6 +3,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import Home from "./pages/Home";
 import Explore from "./pages/Explore";
 import {createMuiTheme } from "./theme/theme";
+import ToggleColorMode from "./components/ToggleColorMode";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -14,11 +15,10 @@ const router = createBrowserRouter(
 );
 
 const App = () => {
-  const theme = createMuiTheme();
   return (
-    <ThemeProvider theme={theme}>
+    <ToggleColorMode>
       <RouterProvider router={router} />
-    </ThemeProvider>
+    </ToggleColorMode>
   );
 };
 

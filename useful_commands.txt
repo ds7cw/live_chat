@@ -19,3 +19,7 @@ npm i axios
 
 # Install Django cors headers
 pip install django-cors-headers
+
+# Install js API for handling cookies
+npm install js-cookie
+npm i --save-dev @types/js-cookie
