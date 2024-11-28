@@ -36,7 +36,10 @@ const PrimaryDraw: React.FC<Props> = ({ children }) => {
         width: theme.primaryDraw.closed,
     });
 
-    const Drawer = styled(MuiDrawer, {})(({ theme, open }) => ({
+    const Drawer = styled(
+        MuiDrawer,
+        {}
+    )(({ theme, open }) => ({
         width: theme.primaryDraw.width,
         whiteSpace: "nowrap",
         boxSizing: "border-box",
