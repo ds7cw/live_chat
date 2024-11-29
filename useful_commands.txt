@@ -32,3 +32,9 @@ pip install uvicorn 'uvicorn[standard]'
 
 # Run uvicorn server
 uvicorn djchat.asgi:application --port 8000 --workers 4 --log-level debug --reload
+
+# Create new Django app
+py manage.py startapp webchat
+
+# Install react-use-websocket
+npm i react-use-websocket
