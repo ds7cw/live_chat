@@ -5,6 +5,7 @@ const socketUrl = 'ws://127.0.0.1:8000/ws/test';
 
 const Server = () => {
     const [message, setMessage] = useState("");
+    const [inputValue, setInputValue] = useState("");
     const { sendJsonMessage } = useWebSocket(socketUrl, {
         onOpen: () => {
             console.log('Connected!')
@@ -20,14 +21,20 @@ const Server = () => {
         },
     });
 
-    const sendHello = () => {
-        const message = { text: "hello"}
+    const sendInputValue = () => {
+        const message = { text: inputValue };
         sendJsonMessage(message);
+        setInputValue("");
     };
 
     return (
         <div>
-            <button onClick={sendHello}>Send Hello</button>
+            <input
+                type="text"
+                value={inputValue} 
+                onChange={(e) => setInputValue(e.target.value)}
+            />
+            <button onClick={sendInputValue}>Send</button>
             <div>Received Data: {message}</div>
         </div>
     )
