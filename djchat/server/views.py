@@ -50,8 +50,11 @@ class ServerListViewSet(viewsets.ViewSet):
             self.queryset = self.queryset[:int(qty)]
 
         if by_server_id:
+            # if not request.user.is_authenticated:
+                #     raise AuthenticationFailed()
+
             try:
-                self.queryset = self.queryset.filter(id=int(by_server_id))
+                self.queryset = self.queryset.filter(id=by_server_id)
                 if not self.queryset.exists():
                     raise ValidationError(detail=f'Server with id {by_server_id} not found')
             except ValueError:
