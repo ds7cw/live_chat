@@ -32,8 +32,9 @@ const ExploreServers = () => {
     const { categoryName } = useParams();
     const url = categoryName
         ? `/server/select/?category=${categoryName}`
-        : "server/select";
+        : "/server/select";
     const { dataCRUD, fetchData } = useCrud<Server>([], url);
+
     useEffect(() => {
         fetchData();
     }, [categoryName]);
