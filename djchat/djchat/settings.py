@@ -37,6 +37,7 @@ ALLOWED_HOSTS = []
 USER_APPS = [
     'account',
     'server',
+    'webchat',
 ]
 
 EXTERNAL_APPS = [
