@@ -13,7 +13,7 @@ class MessageViewSet(viewsets.ViewSet):
         channel_id = request.query_params.get('channel_id')
         
         try:
-            conversation = Conversation.objects.get(id=channel_id)
+            conversation = Conversation.objects.get(channel_id=channel_id)
             message = conversation.message.all()
             serializer = MessageSerializer(message, many=True)
             return Response(serializer.data)
