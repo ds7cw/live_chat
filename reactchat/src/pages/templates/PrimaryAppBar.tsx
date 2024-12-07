@@ -1,7 +1,7 @@
 import { AppBar, Box, Drawer, IconButton, Link, Toolbar, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useEffect ,useState } from "react";
+import { useEffect, useState } from "react";
 import ExploreCategories from "../../components/SecondaryDraw/ExploreCategories";
 import AccountButton from "../../components/PrimaryAppBar/AccountButton";
 
@@ -54,7 +54,7 @@ const PrimaryAppBar = () => {
                     minHeight: theme.primaryAppBar.height
                 }}
             >
-                <Box sx={{ display: {xs: "block", sm:"none" }}}>
+                <Box sx={{ display: { xs: "block", sm:"none" }}}>
                     <IconButton
                         color={fontColorDefault}
                         aria-label="open drawer"

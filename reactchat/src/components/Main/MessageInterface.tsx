@@ -10,14 +10,14 @@ interface Message {
     timestamp: string;
   }
 
-const MessageInterface = () => {
+const messageInterface = () => {
     const [newMessage, setNewMessage] = useState<Message[]>([]);
     const [message, setMessage] = useState("");
     const { serverId, channelId } = useParams();
     const { fetchData } = useCrud<Server>(
         [],
         `/messages/?channel_id=${channelId}`
-    )
+    );
 
     const socketUrl = channelId
         ? `ws://127.0.0.1:8000/${serverId}/${channelId}`
@@ -80,4 +80,4 @@ const MessageInterface = () => {
     )
 };
 
-export default MessageInterface;
+export default messageInterface;

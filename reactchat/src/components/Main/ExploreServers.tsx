@@ -117,7 +117,7 @@ const ExploreServers = () => {
                                         sx={{
                                             flexGrow: 1,
                                             p: 0,
-                                            "&:last-child": {padding: 0},
+                                            "&:last-child": {paddingBottom: 0},
                                         }}
                                     >
                                         <List>

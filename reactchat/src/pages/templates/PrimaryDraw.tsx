@@ -1,8 +1,9 @@
 import { Box, styled, useMediaQuery } from "@mui/material";
-import React, { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import DrawerToggle from "../../components/PrimaryDraw/DrawToggle";
 import MuiDrawer from "@mui/material/Drawer";
+import React from "react";
 
 type Props = {
     children: ReactNode;
@@ -93,7 +94,7 @@ const PrimaryDraw: React.FC<Props> = ({ children }) => {
                 </Box>
                 { React.Children.map(children, (child) => {
                     return React.isValidElement(child)
-                    ? React.cloneElement(child as ChildElement, {open})
+                    ? React.cloneElement(child as ChildElement, { open })
                     : child;
                 })}
             </Box>

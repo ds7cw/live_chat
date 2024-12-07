@@ -44,25 +44,25 @@ const ServerChannels = (props: ServerChannelsProps) => {
                     {server_name}
                 </Typography>
         </Box>
-            <List sx={{py: 0 }}>
+            <List sx={{ py: 0 }}>
                 {data.flatMap((obj) =>
                     obj.channel_server.map((item) => (
                     <ListItem
                         disablePadding
                         key={item.id}
-                        sx={{display: "block", maxHeight: "40px"}}
+                        sx={{ display: "block", maxHeight: "40px" }}
                         dense={true}
                     >
                         <Link
                             to={`/server/${serverId}/${item.id}`}
                             style={{ textDecoration: "none", color: "inherit" }}
                         >
-                            <ListItemButton sx={{minHeight: 48}}>
+                            <ListItemButton sx={{ minHeight: 48 }}>
                                 <ListItemText
                                     primary={
                                         <Typography
                                             variant="body1"
-                                            textAlign={"start"}
+                                            textAlign="start"
                                             paddingLeft={1}
                                         >
                                             {item.name}

@@ -6,10 +6,9 @@ import {
     ListItemText,
     Box,
     Typography,
-    Avatar,
 } from "@mui/material";
-import React from "react";
-import { ListItemAvatar } from "@mui/material";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
 import { MEDIA_URL } from "../../config";
 import { Link } from "react-router-dom";
 
@@ -58,8 +57,8 @@ const UserServers: React.FC<Props & ServerChannelsProps> = ({ open, data }) => {
                             style={{ textDecoration: "none", color: "inherit" }}
                         >
                             <ListItemButton sx={{ minHeight: 0 }}>
-                                <ListItemIcon sx={{ minWidth:0, justifyContent: "center" }}>
-                                    <ListItemAvatar sx={{ minWidth: "50px"}}>
+                                <ListItemIcon sx={{ minWidth: 0, justifyContent: "center" }}>
+                                    <ListItemAvatar sx={{ minWidth: "50px" }}>
                                         <Avatar
                                             alt="Server Icon"
                                             src={`${MEDIA_URL}${item.icon}`}
@@ -95,7 +94,7 @@ const UserServers: React.FC<Props & ServerChannelsProps> = ({ open, data }) => {
                                     sx={{ opacity: open ? 1 : 0 }}
                                     primaryTypographyProps={{
                                         sx:{
-                                            textOverflow: "elipsis",
+                                            textOverflow: "ellipsis",
                                             overflow: "hidden",
                                             whiteSpace: "nowrap",
                                         },

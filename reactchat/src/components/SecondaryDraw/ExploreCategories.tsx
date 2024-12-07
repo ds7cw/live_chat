@@ -56,16 +56,16 @@ const ExploreCategories = () => {
                     <ListItem
                         disablePadding
                         key={item.id}
-                        sx={{display: "block"}}
+                        sx={{ display: "block" }}
                         dense={true}
                     >
                         <Link
                             to={`/explore/${item.name}`}
                             style={{ textDecoration: "none", color: "inherit" }}
                         >
-                            <ListItemButton sx={{minHeight: 48}}>
-                                <ListItemIcon sx={{minWidth: 0, justifyContent: "center"}}>
-                                    <ListItemAvatar sx={{minWidth: "0px"}}>
+                            <ListItemButton sx={{ minHeight: 48 }}>
+                                <ListItemIcon sx={{ minWidth: 0, justifyContent: "center" }}>
+                                    <ListItemAvatar sx={{ minWidth: "0px" }}>
                                         <img
                                             alt="server Icon"
                                             src={`${MEDIA_URL}${item.icon}`}

@@ -4,9 +4,9 @@ import React from "react";
 
 type Props = {
     open: boolean;
-    handleDrawerOpen: () => void;
     handleDrawerClose: () => void;
-}
+    handleDrawerOpen: () => void;
+};
 
 const DrawerToggle: React.FC<Props> = ({
     open,

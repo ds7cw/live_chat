@@ -6,13 +6,13 @@ import {
     ListItemText,
     Box,
     Typography,
-    Avatar,
 } from "@mui/material";
 import useCrud from "../../hooks/useCrud";
-import React, { useEffect } from "react";
-import { ListItemAvatar } from "@mui/material";
+import { useEffect } from "react";
 import { MEDIA_URL } from "../../config";
 import { Link } from "react-router-dom";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
 
 interface Server {
     id: number;
@@ -56,7 +56,7 @@ const PopularChannels: React.FC<Props> = ({ open }) => {
             <List>
                 {dataCRUD.map((item) => (
                     <ListItem key={item.id} disablePadding
-                        sx={{display: "block"}}
+                        sx={{ display: "block" }}
                         dense={true}
                     >
                         <Link to={`/server/${item.id}`}
@@ -64,7 +64,7 @@ const PopularChannels: React.FC<Props> = ({ open }) => {
                         >
                             <ListItemButton sx={{ minHeight: 0 }}>
                                 <ListItemIcon sx={{ minWidth:0, justifyContent: "center" }}>
-                                    <ListItemAvatar sx={{ minWidth: "50px"}}>
+                                    <ListItemAvatar sx={{ minWidth: "50px" }}>
                                         <Avatar
                                             alt="Server Icon"
                                             src={`${MEDIA_URL}${item.icon}`}
@@ -100,7 +100,7 @@ const PopularChannels: React.FC<Props> = ({ open }) => {
                                     sx={{ opacity: open ? 1 : 0 }}
                                     primaryTypographyProps={{
                                         sx:{
-                                            textOverflow: "elipsis",
+                                            textOverflow: "ellipsis",
                                             overflow: "hidden",
                                             whiteSpace: "nowrap",
                                         },
