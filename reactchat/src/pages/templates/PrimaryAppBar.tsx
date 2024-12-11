@@ -6,7 +6,7 @@ import ExploreCategories from "../../components/SecondaryDraw/ExploreCategories"
 import AccountButton from "../../components/PrimaryAppBar/AccountButton";
 
 const PrimaryAppBar = () => {
-    const [sideMenu, setSideMenu] = useState(false)
+    const [sideMenu, setSideMenu] = useState(false);
     const theme = useTheme();
     const fontColorDefault = "default"
     const fontColorTextSecond = "textSecondary"
@@ -38,7 +38,8 @@ const PrimaryAppBar = () => {
         >
             <ExploreCategories />
         </Box>
-    )
+    );
+    
     return (
         <AppBar
             sx={{
