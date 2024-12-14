@@ -5,7 +5,6 @@ import {
     Typography,
     IconButton,
     Drawer,
-    listClasses,
     useMediaQuery, 
 } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
@@ -30,7 +29,7 @@ const MessageInterfaceChannels = (props: ServerChannelProps) => {
     const channelName =
         data
             ?.find((server) => server.id == Number(serverId))
-            ?.channel_server?.find((channel) => channel.id === Number(channelId));
+            ?.channel_server?.find((channel) => channel.id === Number(channelId))
             ?.name || "home";
 
     const isSmallScreen = useMediaQuery(theme.breakpoints.up("sm"));
