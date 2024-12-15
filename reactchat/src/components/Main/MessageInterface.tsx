@@ -10,9 +10,17 @@ import {
     ListItem,
     ListItemAvatar,
     ListItemText,
-    Typography
+    Typography,
+    TextField,
+    useTheme,
 } from '@mui/material';
 import MessageInterfaceChannels from './MessageInterfaceChannels';
+
+interface SendMessageData {
+    type: string;
+    message: string;
+    [key: string]: any;
+}
 
 interface ServerChannelProps {
     data: Server[];
@@ -26,6 +34,7 @@ interface Message {
 
 const messageInterface = (props: ServerChannelProps) => {
     const  { data } = props;
+    const theme = useTheme();
     const [newMessage, setNewMessage] = useState<Message[]>([]);
     const [message, setMessage] = useState("");
     const { serverId, channelId } = useParams();
@@ -62,8 +71,27 @@ const messageInterface = (props: ServerChannelProps) => {
         onMessage: (msg) => {
             const data = JSON.parse(msg.data);
             setNewMessage(prev_msg => [...prev_msg, data.new_message]);
+            setMessage("");
         },
     });
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter"){
+            e.preventDefault();
+            sendJsonMessage({
+                type: "message",
+                message,
+            } as SendMessageData);
+        }
+    };
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        sendJsonMessage({
+            type: "message",
+            message,
+        } as SendMessageData);
+    };
 
     return (
         <>
@@ -147,6 +175,37 @@ const messageInterface = (props: ServerChannelProps) => {
                                 );
                             })}
                         </List>
+                    </Box>
+                    <Box
+                        sx={{
+                            position: "sticky",
+                            bottom: 0,
+                            width: "100%",
+                        }}
+                    >
+                        <form
+                            onSubmit={handleSubmit}
+                            style={{
+                                bottom: 0,
+                                right: 0,
+                                padding: "1rem",
+                                backgroundColor: theme.palette.background.default,
+                                zIndex: 1,
+                            }}
+                        >
+                            <Box sx={{ display: "flex" }}>
+                                <TextField
+                                    fullWidth
+                                    multiline
+                                    value={message}
+                                    minRows={1}
+                                    maxRows={4}
+                                    onKeyDown={handleKeyDown}
+                                    onChange={(e) => setMessage(e.target.value)}
+                                    sx={{ flexGrow: 1 }}
+                                />
+                            </Box>
+                        </form>
                     </Box>
                     {/* <div>
                         {newMessage.map((msg: Message, index: number) => {
