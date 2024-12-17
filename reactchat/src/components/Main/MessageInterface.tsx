@@ -95,6 +95,21 @@ const messageInterface = (props: ServerChannelProps) => {
         } as SendMessageData);
     };
 
+    function formatTimeStamp(timestamp: string): string {
+        const date = new Date(Date.parse(timestamp));
+        const formattedDate = `${
+            date.getDate()
+        }/${date.getMonth() + 1}/${date.getFullYear()}`;
+    
+        const formattedTime = date.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+        });
+    
+        return `${formattedDate} at ${formattedTime}`;
+    }
+
     return (
         <>
             <MessageInterfaceChannels data={data} />
@@ -142,14 +157,24 @@ const messageInterface = (props: ServerChannelProps) => {
                                                     variant: "body2",
                                                 }}
                                                 primary={
-                                                    <Typography
-                                                        component="span"
-                                                        variant="body1"
-                                                        color="text.primary"
-                                                        sx={{ display: "inline", fontWeight: 600 }}
-                                                    >
-                                                        {msg.sender}
-                                                    </Typography>
+                                                    <>
+                                                        <Typography
+                                                            component="span"
+                                                            variant="body1"
+                                                            color="text.primary"
+                                                            sx={{ display: "inline", fontWeight: 600 }}
+                                                        >
+                                                            {msg.sender}
+                                                        </Typography>
+                                                        <Typography
+                                                            component="span"
+                                                            variant="caption"
+                                                            color="textSecondary"
+                                                        >
+                                                            {" at "}
+                                                            {formatTimeStamp(msg.timestamp)}
+                                                        </Typography>
+                                                    </>
                                                 }
                                                 secondary={
                                                     <>
