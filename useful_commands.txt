@@ -38,3 +38,6 @@ py manage.py startapp webchat
 
 # Install react-use-websocket
 npm i react-use-websocket
+
+# Install Simple JWT 
+pip install djangorestframework-simplejwt
