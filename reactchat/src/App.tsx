@@ -4,6 +4,7 @@ import Server from "./pages/Server";
 import Explore from "./pages/Explore";
 import ToggleColorMode from "./components/ToggleColorMode";
 import Login from "./pages/Login";
+import AuthServiceProvider from "./context/AuthContext";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,9 +19,11 @@ const router = createBrowserRouter(
 
 const App = () => {
   return (
-    <ToggleColorMode>
-      <RouterProvider router={router} />
-    </ToggleColorMode>
+    <AuthServiceProvider>
+      <ToggleColorMode>
+        <RouterProvider router={router} />
+      </ToggleColorMode>
+    </AuthServiceProvider>
   );
 };
 

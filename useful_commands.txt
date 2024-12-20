@@ -41,3 +41,6 @@ npm i react-use-websocket
 
 # Install Simple JWT 
 pip install djangorestframework-simplejwt
+
+# Install formik open source form library for React
+npm i formik
