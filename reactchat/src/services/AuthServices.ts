@@ -68,6 +68,16 @@ export function useAuthService(): AuthServiceProps {
         }
     }
 
-    return {login}
+    const logout = () => {
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+        localStorage.removeItem("userId")
+        localStorage.removeItem("username")
+        localStorage.setItem("isLoggedIn", "false")
+        setIsLoggedIn(false);
+
+    }
+
+    return {login, isLoggedIn, logout}
    
 }
