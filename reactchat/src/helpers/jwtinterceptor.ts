@@ -33,7 +33,7 @@ const useAxiosWithInterceptor = (): AxiosInstance => {
                     throw refreshError
                 }
             } else {
-                navigate('login')
+                navigate('/login')
             }
         }
         throw error;
