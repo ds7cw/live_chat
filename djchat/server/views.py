@@ -46,9 +46,6 @@ class ServerListViewSet(viewsets.ViewSet):
         if with_num_members:
             self.queryset = self.queryset.annotate(num_members=Count('member'))
 
-        if qty:
-            self.queryset = self.queryset[:int(qty)]
-
         if by_server_id:
             # if not request.user.is_authenticated:
                 #     raise AuthenticationFailed()
@@ -59,6 +56,9 @@ class ServerListViewSet(viewsets.ViewSet):
                     raise ValidationError(detail=f'Server with id {by_server_id} not found')
             except ValueError:
                 raise ValidationError(detail='Incorrect server_id input type')
+
+        if qty:
+            self.queryset = self.queryset[:int(qty)]
 
         serializer = ServerSerializer(self.queryset, many=True, context={'num_members': with_num_members})
         return Response(serializer.data)
