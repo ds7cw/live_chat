@@ -30,7 +30,7 @@ class JWTCookieTokenRefreshSerializer(TokenRefreshSerializer):
     refresh = None
 
     def validate(self, attrs):
-        attrs['refresh'] = self.context['request'].COOKIES.get(settings.JWT_SIMPLE['REFRESH_TOKEN_NAME'])
+        attrs['refresh'] = self.context['request'].COOKIES.get(settings.SIMPLE_JWT['REFRESH_TOKEN_NAME'])
 
         if attrs['refresh']:
             return super().validate(attrs)
