@@ -16,12 +16,13 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djchat.settings')
 django_application = get_asgi_application()
 
 from . import urls # placement after .settings is intentional
+from webchat.middleware import JWTAuthMiddleWare
 
 
 # application = get_asgi_application()
 application = ProtocolTypeRouter(
     {
         'http': get_asgi_application(),
-        'websocket': URLRouter(urls.websocket_urlpatterns),
+        'websocket': JWTAuthMiddleWare(URLRouter(urls.websocket_urlpatterns)),
     }
 )
