@@ -1,9 +1,3 @@
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import useWebSocket from 'react-use-websocket'
-import useCrud from '../../hooks/useCrud';
-import { Server } from '../../@types/server';
-import { useAuthService } from '../../services/AuthServices';
 import {
     Avatar,
     Box,
@@ -16,8 +10,11 @@ import {
     useTheme,
 } from '@mui/material';
 import MessageInterfaceChannels from './MessageInterfaceChannels';
-import Scroll from './Scroll';
 import React from "react";
+import { Server } from '../../@types/server';
+import Scroll from './Scroll';
+import useChatWebSocket from '../../services/chatService';
+import { useParams } from 'react-router-dom';
 
 interface SendMessageData {
     type: string;
@@ -33,74 +30,18 @@ interface Message {
     sender: string;
     content: string;
     timestamp: string;
-  }
+}
 
 const messageInterface = (props: ServerChannelProps) => {
     const  { data } = props;
     const theme = useTheme();
-    const [newMessage, setNewMessage] = useState<Message[]>([]);
-    const [message, setMessage] = useState("");
+
     const { serverId, channelId } = useParams();
-    const server_name = data?.[0]?.name ?? "Server";
-    const { logout, refreshAccessToken } = useAuthService();
-    const { fetchData } = useCrud<Server>(
-        [],
-        `/messages/?channel_id=${channelId}`
+    const { newMessage, message, setMessage, sendJsonMessage } = useChatWebSocket(
+        channelId || "",
+        serverId || "",
     );
-
-    const socketUrl = channelId
-        ? `ws://127.0.0.1:8000/${serverId}/${channelId}`
-        : null;
-
-    const [reconnectionAttempt, setReconnectionAttempt] = useState(0);
-    const maxConnectionAttempts = 4;
-
-    const { sendJsonMessage } = useWebSocket(socketUrl, {
-        onOpen: async () => {
-            try {
-                const data = await fetchData();
-                setNewMessage([]);
-                setNewMessage(Array.isArray(data)
-                    ? data
-                    : []
-                );
-                console.log('Connected!');
-            } catch (error) {
-                console.log(error);
-            }
-        },
-        onClose: (event: CloseEvent) => {
-            if (event.code == 4001) {
-                console.log("Authentication Error");
-                refreshAccessToken().catch((error) => {
-                    if(error.response && error.response.status === 401) {
-                        logout();
-                    }
-                })
-            }
-            console.log("Close");
-            setReconnectionAttempt((prevAttempt) => prevAttempt + 1)
-        },
-        onError: () => {
-            console.log("Error!");
-        },
-        onMessage: (msg) => {
-            const data = JSON.parse(msg.data);
-            setNewMessage(prev_msg => [...prev_msg, data.new_message]);
-            setMessage("");
-        },
-        shouldReconnect: (closeEvent) => {
-            if (
-                closeEvent.code === 4001 &&
-                reconnectionAttempt >= maxConnectionAttempts
-            ) {
-                setReconnectionAttempt(0);
-                return false;
-            }
-            return true;
-        },
-        reconnectInterval: 1000,
-    });
+    const server_name = data?.[0]?.name ?? "Server";
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter"){
@@ -261,33 +202,6 @@ const messageInterface = (props: ServerChannelProps) => {
                             </Box>
                         </form>
                     </Box>
-                    {/* <div>
-                        {newMessage.map((msg: Message, index: number) => {
-                            return (
-                                <div key={index}>
-                                    <p>{msg.sender}</p>
-                                    <p>{msg.content}</p>
-                                </div>
-                            );
-                        })}
-                        <form>
-                            <label>
-                                Enter Message:
-                                <input
-                                    type="text"
-                                    value={message}
-                                    onChange={(e) => setMessage(e.target.value)}
-                                />
-                            </label>
-                        </form>
-                        <button
-                            onClick={() => {
-                                sendJsonMessage({ type: 'message', message });
-                            }}
-                        >
-                            Send Message
-                        </button>
-                    </div> */}
                 </>
             )}
         </>
