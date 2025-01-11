@@ -44,3 +44,6 @@ pip install djangorestframework-simplejwt
 
 # Install formik open source form library for React
 npm i formik
+
+# Collect necessary static files for the project 
+python manage.py collectstatic
