@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from account.views import AccountViewSet, JWTCookieTokenObtainPairView, JWTCookieTokenRefreshView, LogOutAPIView
+from account.views import AccountViewSet, JWTCookieTokenObtainPairView, JWTCookieTokenRefreshView, LogOutAPIView, RegisterView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -40,6 +40,7 @@ urlpatterns = [
     path('api/token/', JWTCookieTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', JWTCookieTokenRefreshView.as_view(), name='token_refresh'),
     path('api/logout/', LogOutAPIView.as_view(), name='logout'),
+    path('api/register/', RegisterView.as_view(), name='register'),
 ] + router.urls
 
 websocket_urlpatterns = [
