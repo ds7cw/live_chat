@@ -35,6 +35,9 @@ class ServerMembershipViewSet(viewsets.ViewSet):
         if not server.member.filter(id=user.id).exists():
             return Response({'error': 'User in not a member'}, status=status.HTTP_404_NOT_FOUND)
 
+        if server.owner == user:
+            return Response({'error': 'Owners cannot be removed as a member'}, status=status.HTTP_409_CONFLICT)
+
         server.member.remove(user)
 
         return Response({'message': 'User removed from server'}, status=status.HTTP_200_OK)

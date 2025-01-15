@@ -3,6 +3,7 @@ from channels.generic.websocket import JsonWebsocketConsumer
 from django.contrib.auth import get_user_model
 
 from .models import Conversation, Message
+from server.models import Server
 
 
 User = get_user_model()
@@ -21,10 +22,18 @@ class WebChatConsumer(JsonWebsocketConsumer):
             self.close(code=4001)
 
         self.channel_id = self.scope['url_route']['kwargs']['channelId']
+        self.server_id = self.scope['url_route']['kwargs']['serverId']
         self.user = User.objects.get(id=self.user.id)
+
+        server = Server.objects.get(id=self.server_id)
+        self.is_member = server.member.filter(id=self.user.id).exists()
+
         async_to_sync(self.channel_layer.group_add)(self.channel_id,self.channel_name,)
 
     def receive_json(self, content):
+        if not self.is_member:
+            return
+
         channel_id = self.channel_id
         sender = self.user
         message = content['message']
